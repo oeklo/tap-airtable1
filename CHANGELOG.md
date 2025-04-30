@@ -1,3 +1,11 @@
+# Changelog
+## 0.2.0 (2025-04-30)
+
+### Changed
+
+- Updated dependencies and poetry
+
+
 ## 0.1.0 (2024-05-19)
 
 ### Feat
