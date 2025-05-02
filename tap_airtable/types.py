@@ -33,11 +33,26 @@ AirtableCollaborator = th.ObjectType(
     th.Property("profilePicUrl", th.StringType),
 )
 
+Button = th.ObjectType(
+    th.Property("label", th.StringType),
+    th.Property("url", th.URIType),
+)
+
+Formula = th.OneOf(
+    th.StringType,
+    th.NumberType,
+)
+
+Lookup = th.OneOf(
+    th.ArrayType(th.StringType),
+    th.ArrayType(th.NumberType),
+)
+
 AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "aiText": th.StringType,
     "autoNumber": th.StringType,
     "barcode": th.StringType,
-    "button": th.StringType,
+    "button": Button,
     "checkbox": th.BooleanType,
     "count": th.StringType,
     "createdBy": th.StringType,
@@ -48,10 +63,10 @@ AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
     "duration": th.StringType,
     "email": th.StringType,
     "externalSyncSource": th.StringType,
-    "formula": th.StringType,
+    "formula": Formula,
     "lastModifiedBy": th.StringType,
     "lastModifiedTime": th.DateTimeType,
-    "lookup": th.StringType,
+    "lookup": Lookup,
     "multilineText": th.StringType,
     "multipleAttachments": th.ArrayType(AirtableAttachment),
     "multipleCollaborators": th.ArrayType(AirtableCollaborator),
