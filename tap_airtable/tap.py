@@ -2,8 +2,7 @@
 
 import logging
 
-from singer_sdk import Tap
-from singer_sdk import typing as th
+from singer_sdk import Tap, typing as th
 
 from tap_airtable.client import AirtableClient
 from tap_airtable.streams import BaseAirtableStream, airtable_stream_factory

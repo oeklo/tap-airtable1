@@ -3,7 +3,9 @@ from typing import Any
 from singer_sdk import typing as th
 
 AirtableThumbnail = th.ObjectType(
-    th.Property("url", th.StringType), th.Property("height", th.NumberType), th.Property("width", th.NumberType)
+    th.Property("height", th.NumberType),
+    th.Property("url", th.StringType),
+    th.Property("width", th.NumberType),
 )
 
 AirtableThumbnailSet = th.ObjectType(
@@ -13,57 +15,72 @@ AirtableThumbnailSet = th.ObjectType(
 )
 
 AirtableAttachment = th.ObjectType(
-    th.Property("id", th.StringType),
-    th.Property("type", th.StringType),
     th.Property("filename", th.StringType),
     th.Property("height", th.NumberType),
+    th.Property("id", th.StringType),
     th.Property("size", th.NumberType),
+    th.Property("thumbnails", AirtableThumbnailSet),
+    th.Property("type", th.StringType),
     th.Property("url", th.StringType),
     th.Property("width", th.NumberType),
-    th.Property("thumbnails", AirtableThumbnailSet),
 )
 
 AirtableCollaborator = th.ObjectType(
-    th.Property("id", th.StringType),
     th.Property("email", th.StringType),
+    th.Property("id", th.StringType),
     th.Property("name", th.StringType),
     th.Property("permissionLevel", th.StringType),
     th.Property("profilePicUrl", th.StringType),
 )
 
+Button = th.ObjectType(
+    th.Property("label", th.StringType),
+    th.Property("url", th.URIType),
+)
+
+Formula = th.OneOf(
+    th.StringType,
+    th.NumberType,
+)
+
+Lookup = th.OneOf(
+    th.ArrayType(th.StringType),
+    th.ArrayType(th.NumberType),
+)
+
 AIRTABLE_TO_SINGER_MAPPING: dict[str, Any] = {
-    "singleLineText": th.StringType,
-    "email": th.StringType,
-    "url": th.StringType,
-    "multilineText": th.StringType,
-    "number": th.NumberType,
-    "percent": th.StringType,
-    "currency": th.StringType,
-    "singleSelect": th.StringType,
-    "multipleSelects": th.ArrayType(th.StringType),
-    "singleCollaborator": th.StringType,
-    "multipleCollaborators": th.ArrayType(AirtableCollaborator),
-    "multipleRecordLinks": th.ArrayType(th.StringType),
-    "date": th.DateType,
-    "dateTime": th.DateTimeType,
-    "phoneNumber": th.StringType,
-    "multipleAttachments": th.ArrayType(AirtableAttachment),
-    "checkbox": th.BooleanType,
-    "formula": th.StringType,
-    "createdTime": th.DateTimeType,
-    "rollup": th.StringType,
-    "count": th.StringType,
-    "lookup": th.StringType,
-    "multipleLookupValues": th.ArrayType(th.StringType),
+    "aiText": th.StringType,
     "autoNumber": th.StringType,
     "barcode": th.StringType,
+    "button": Button,
+    "checkbox": th.BooleanType,
+    "count": th.StringType,
+    "createdBy": th.StringType,
+    "createdTime": th.DateTimeType,
+    "currency": th.StringType,
+    "date": th.DateType,
+    "dateTime": th.DateTimeType,
+    "duration": th.StringType,
+    "email": th.StringType,
+    "externalSyncSource": th.StringType,
+    "formula": Formula,
+    "lastModifiedBy": th.StringType,
+    "lastModifiedTime": th.DateTimeType,
+    "lookup": Lookup,
+    "multilineText": th.StringType,
+    "multipleAttachments": th.ArrayType(AirtableAttachment),
+    "multipleCollaborators": th.ArrayType(AirtableCollaborator),
+    "multipleLookupValues": th.ArrayType(th.StringType),
+    "multipleRecordLinks": th.ArrayType(th.StringType),
+    "multipleSelects": th.ArrayType(th.StringType),
+    "number": th.NumberType,
+    "percent": th.StringType,
+    "phoneNumber": th.StringType,
     "rating": th.StringType,
     "richText": th.StringType,
-    "duration": th.StringType,
-    "lastModifiedTime": th.DateTimeType,
-    "button": th.StringType,
-    "createdBy": th.StringType,
-    "lastModifiedBy": th.StringType,
-    "externalSyncSource": th.StringType,
-    "aiText": th.StringType,
+    "rollup": th.StringType,
+    "singleCollaborator": th.StringType,
+    "singleLineText": th.StringType,
+    "singleSelect": th.StringType,
+    "url": th.StringType,
 }
