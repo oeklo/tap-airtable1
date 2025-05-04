@@ -11,9 +11,9 @@ logo_url: /airtable.png
 maintenance_status: active
 name: tap-airtable
 namespace: tap_airtable
-pip_url: git+https://github.com/tomasvotava/tap-airtable.git
+pip_url: git+https://github.com/oeklo/tap-airtable1.git
 quality: gold
-repo: https://github.com/tomasvotava/tap-airtable
+repo: https://github.com/oeklo/tap-airtable1
 settings:
   - description: Airtable token.
     kind: string
@@ -27,4 +27,4 @@ settings:
     kind: object
     label: Table Mapping
     name: table_mapping
-variant: tomasvotava
+variant: oeklo
